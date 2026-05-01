@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import "./ProductCard.css";
 
@@ -19,7 +20,14 @@ const ProductCard = ({ id, image, name, price, oldPrice, isNew, onBuyNow }) => {
   };
 
   return (
-    <div className="product-card scroll-animate">
+    <motion.div 
+      className="product-card"
+      whileHover={{ y: -8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="product-image-wrapper">
         <img
           src={image}
@@ -66,9 +74,8 @@ const ProductCard = ({ id, image, name, price, oldPrice, isNew, onBuyNow }) => {
           {oldPrice && <span className="product-old-price">{oldPrice}</span>}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default ProductCard;
-

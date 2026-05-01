@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -12,6 +13,7 @@ import BlogPage from "./pages/BlogPage";
 import ContactPage from "./pages/ContactPage";
 import CartPage from "./pages/CartPage";
 import AboutPage from "./pages/AboutPage";
+import PageTransition from "./components/PageTransition";
 import "./App.css";
 
 // Import product images
@@ -26,70 +28,38 @@ import DenChinhHuong from "./assets/sp/SP_đèn chỉnh hướng.jpg";
 
 // Dummy data
 const amTranProducts = [
-  {
-    id: "h1",
-    image: DenLedAmTranDownlight,
-    name: "Đèn LED âm trần Downlight...",
-    price: "198.000đ",
-  },
-  {
-    id: "h2",
-    image: DenLedAmTranChinhHuongDoi,
-    name: "Đèn LED âm trần chỉnh hướng đôi",
-    price: "278.000đ",
-  },
-  {
-    id: "h3",
-    image: DenLedAmTranChinhHuong,
-    name: "Đèn LED âm trần chỉnh hướng",
-    price: "223.000đ",
-  },
-  {
-    id: "h4",
-    image: DenChinhHuong,
-    name: "Đèn LED âm trần chỉnh hướ...",
-    price: "215.000đ",
-  },
-  {
-    id: "h5",
-    image: DenLebBulb,
-    name: "Âm trần siêu mỏng 9w - V...",
-    price: "208.000đ",
-  },
+  { id: "h1", image: DenLedAmTranDownlight, name: "Đèn LED âm trần Downlight...", price: "198.000đ" },
+  { id: "h2", image: DenLedAmTranChinhHuongDoi, name: "Đèn LED âm trần chỉnh hướng đôi", price: "278.000đ" },
+  { id: "h3", image: DenLedAmTranChinhHuong, name: "Đèn LED âm trần chỉnh hướng", price: "223.000đ" },
+  { id: "h4", image: DenChinhHuong, name: "Đèn LED âm trần chỉnh hướ...", price: "215.000đ" },
+  { id: "h5", image: DenLebBulb, name: "Âm trần siêu mỏng 9w - V...", price: "208.000đ" },
 ];
 
 const opTranProducts = [
-  {
-    id: "h6",
-    image: DenLedTuyp,
-    name: "Led Ốp trần 24w vỏ đ...",
-    price: "450.000đ",
-  },
-  {
-    id: "h7",
-    image: DenLedRayRot,
-    name: "Đèn Led Ốp trần 12w vỏ đ...",
-    price: "301.000đ",
-  },
-  {
-    id: "h8",
-    image: DenLedNhaXuongHighBay,
-    name: "Đèn Led Ốp trần 24w vỏ tr...",
-    price: "590.000đ",
-  },
-  {
-    id: "h9",
-    image: DenLebBulb,
-    name: "Đèn Led Ốp trần 12w vỏ tr...",
-    price: "281.000đ",
-  },
-  {
-    id: "h10",
-    image: DenLedAmTranDownlight,
-    name: "Đèn Led Ốp trần 24w vỏ đ...",
-    price: "585.000đ",
-  },
+  { id: "h6", image: DenLedTuyp, name: "Led Ốp trần 24w vỏ đ...", price: "450.000đ" },
+  { id: "h7", image: DenLedRayRot, name: "Đèn Led Ốp trần 12w vỏ đ...", price: "301.000đ" },
+  { id: "h8", image: DenLedNhaXuongHighBay, name: "Đèn Led Ốp trần 24w vỏ tr...", price: "590.000đ" },
+  { id: "h9", image: DenLebBulb, name: "Đèn Led Ốp trần 12w vỏ tr...", price: "281.000đ" },
+  { id: "h10", image: DenLedAmTranDownlight, name: "Đèn Led Ốp trần 24w vỏ đ...", price: "585.000đ" },
 ];
+
+function AnimatedRoutes({ amTranProducts, opTranProducts, handleBuyNow, cartItems, updateQuantity, removeItem }) {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><HomePage amTranProducts={amTranProducts} opTranProducts={opTranProducts} onBuyNow={handleBuyNow} /></PageTransition>} />
+        <Route path="/products" element={<PageTransition><ProductPage onBuyNow={handleBuyNow} /></PageTransition>} />
+        <Route path="/product/:id" element={<PageTransition><ProductDetailPage onBuyNow={handleBuyNow} /></PageTransition>} />
+        <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+        <Route path="/cart" element={<PageTransition><CartPage cartItems={cartItems} updateQuantity={updateQuantity} removeItem={removeItem} /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -104,35 +74,23 @@ function App() {
   ]);
 
   const handleBuyNow = (product) => {
-    // Check if product already exists
     const existing = cartItems.find((item) => item.id === product.id);
     if (existing) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
-            : item
-        )
-      );
+      setCartItems(cartItems.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + (product.quantity || 1) } : item));
     } else {
-      setCartItems([
-        ...cartItems,
-        { ...product, quantity: product.quantity || 1 },
-      ]);
+      setCartItems([...cartItems, { ...product, quantity: product.quantity || 1 }]);
     }
     setIsCartOpen(true);
   };
 
   const updateQuantity = (id, change) => {
-    setCartItems(
-      cartItems.map((item) => {
-        if (item.id === id) {
-          const newQty = item.quantity + change;
-          return newQty > 0 ? { ...item, quantity: newQty } : item;
-        }
-        return item;
-      })
-    );
+    setCartItems(cartItems.map((item) => {
+      if (item.id === id) {
+        const newQty = item.quantity + change;
+        return newQty > 0 ? { ...item, quantity: newQty } : item;
+      }
+      return item;
+    }));
   };
 
   const removeItem = (id) => {
@@ -142,55 +100,19 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header
-          cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
-        />
+        <Header cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)} />
         <Navbar />
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomePage
-                amTranProducts={amTranProducts}
-                opTranProducts={opTranProducts}
-                onBuyNow={handleBuyNow}
-              />
-            }
-          />
-          <Route
-            path="/products"
-            element={<ProductPage onBuyNow={handleBuyNow} />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProductDetailPage onBuyNow={handleBuyNow} />}
-          />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route
-            path="/cart"
-            element={
-              <CartPage
-                cartItems={cartItems}
-                updateQuantity={updateQuantity}
-                removeItem={removeItem}
-              />
-            }
-          />
-        </Routes>
-
-        <Footer />
-        <FloatingActionButtons />
-
-        <CartPopup
-          isOpen={isCartOpen}
-          onClose={() => setIsCartOpen(false)}
+        <AnimatedRoutes 
+          amTranProducts={amTranProducts} 
+          opTranProducts={opTranProducts} 
+          handleBuyNow={handleBuyNow}
           cartItems={cartItems}
           updateQuantity={updateQuantity}
           removeItem={removeItem}
         />
+        <Footer />
+        <FloatingActionButtons />
+        <CartPopup isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartItems={cartItems} updateQuantity={updateQuantity} removeItem={removeItem} />
       </div>
     </Router>
   );
