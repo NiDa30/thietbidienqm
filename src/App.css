@@ -1,0 +1,15 @@
+/* App.css */
+@import "./components/Theme.css";
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Mobile Responsive - Container padding */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px !important;
+  }
+}

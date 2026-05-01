@@ -1,0 +1,327 @@
+.header {
+  width: 100%;
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: var(--primary-green);
+  color: var(--white);
+  padding: 8px 0;
+  font-size: 13px;
+}
+
+.top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-left {
+  display: flex;
+  gap: 15px;
+}
+
+.phone-badge {
+  background-color: var(--accent-orange);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.phone-badge:hover {
+  background-color: #e65c00;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Main Header */
+.main-header {
+  background-color: #dcdcdc; /* Based on image background */
+  padding: 25px 0;
+}
+
+.main-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-icon::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: #c9e05f;
+  border-radius: 50%;
+}
+
+.logo-text {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.text-dark {
+  color: #1a5632;
+}
+
+.text-green {
+  color: var(--primary-green);
+}
+
+/* Search */
+.search-container {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+  height: 40px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-btn {
+  background-color: var(--accent-orange);
+  color: var(--white);
+  padding: 0 25px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #e65c00;
+}
+
+/* Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  background-color: #00a0b6;
+  height: 45px;
+  color: white;
+}
+
+.hotline-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.icon-circle {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  color: #00a0b6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.hotline-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.hotline-title {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hotline-number {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cart-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.cart-icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  color: #00a0b6;
+  border-radius: 50%;
+}
+
+.cart-icon {
+  font-size: 14px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #fdd835;
+  color: #333;
+  font-size: 10px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  /* Top Bar - Stack elements */
+  .top-bar {
+    padding: 5px 0;
+    font-size: 11px;
+  }
+
+  .top-bar-inner {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .top-bar-left {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .phone-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  .address {
+    font-size: 10px;
+    justify-content: center;
+  }
+
+  /* Main Header - Compact layout */
+  .main-header {
+    padding: 10px 0;
+  }
+
+  .main-header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Logo - Smaller size */
+  .logo-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+  }
+
+  .logo-icon::after {
+    width: 28px;
+    height: 28px;
+    bottom: -7px;
+    right: -7px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  /* Search - Full width */
+  .search-container {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    height: 45px;
+  }
+
+  .search-input {
+    font-size: 13px;
+  }
+
+  .search-btn {
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  /* Actions - Simplified */
+  .header-actions {
+    height: auto;
+    padding: 5px 0;
+  }
+
+  .hotline-box {
+    padding: 0 10px;
+  }
+
+  .icon-circle {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+  }
+
+  .hotline-text {
+    display: none; /* Hide text on mobile, keep icon */
+  }
+
+  .cart-box {
+    padding: 0 10px;
+  }
+
+  .cart-text {
+    display: none; /* Hide text on mobile */
+  }
+}
