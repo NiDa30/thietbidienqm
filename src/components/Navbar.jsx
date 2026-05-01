@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 
 // Import categories
@@ -8,10 +8,25 @@ import { categories } from "../data/categories";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className="navbar">
       <div className="container">
+        {/* Mobile Menu Button */}
+        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        {/* Desktop Menu */}
         <ul className="nav-menu">
           <li className="nav-item">
             <Link to="/" className="nav-link">
@@ -32,7 +47,7 @@ const Navbar = () => {
               SẢN PHẨM <FaChevronDown className="dropdown-icon" />
             </Link>
 
-            {/* Mega Menu based on Image 2 */}
+            {/* Mega Menu */}
             {isDropdownOpen && (
               <div className="mega-menu">
                 <div className="mega-menu-inner">
@@ -89,6 +104,28 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+
+        {/* Mobile Menu Overlay & Drawer */}
+        <div 
+          className={`mobile-menu-overlay ${isMobileMenuOpen ? "active" : ""}`} 
+          onClick={closeMobileMenu}
+        ></div>
+        
+        <div className={`mobile-menu ${isMobileMenuOpen ? "active" : ""}`}>
+          <div className="mobile-menu-header">
+            <span className="mobile-menu-title">DANH MỤC</span>
+            <button className="mobile-menu-close" onClick={closeMobileMenu}>
+              <FaTimes />
+            </button>
+          </div>
+          <ul className="mobile-menu-list">
+            <li><Link to="/" onClick={closeMobileMenu}>TRANG CHỦ</Link></li>
+            <li><Link to="/about" onClick={closeMobileMenu}>GIỚI THIỆU</Link></li>
+            <li><Link to="/products" onClick={closeMobileMenu}>SẢN PHẨM</Link></li>
+            <li><Link to="/blog" onClick={closeMobileMenu}>BLOG</Link></li>
+            <li><Link to="/contact" onClick={closeMobileMenu}>LIÊN HỆ</Link></li>
+          </ul>
+        </div>
       </div>
     </nav>
   );
