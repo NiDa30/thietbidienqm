@@ -1,0 +1,79 @@
+.qr-contact-container {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border: 1px solid #e9ecef;
+}
+
+.qr-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--primary-green);
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.qr-cards-wrapper {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.qr-card {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  flex: 1;
+  max-width: 140px;
+  transition: transform 0.3s ease;
+}
+
+.qr-card:hover {
+  transform: translateY(-5px);
+}
+
+.qr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.qr-card.zalo .qr-card-header {
+  color: #0068ff;
+}
+
+.qr-image-box {
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.qr-image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qr-card p {
+  font-size: 9px;
+  color: #888;
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .qr-cards-wrapper {
+    flex-direction: row;
+  }
+}

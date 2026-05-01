@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import QRCodeSection from '../components/QRCodeSection';
 import './ContactPage.css';
 
 const ContactPage = () => {
@@ -39,6 +40,9 @@ const ContactPage = () => {
               <div className="info-line">
                 <strong>Giờ Làm Việc:</strong> 8h-22h
               </div>
+              
+              {/* New QR Contact UI */}
+              <QRCodeSection url={window.location.origin} zaloNumber="0833939368" />
             </div>
           </div>
 
@@ -81,7 +85,6 @@ const ContactPage = () => {
 
         {/* Map Section */}
         <div className="contact-map">
-          {/* Using a generic map embed link as placeholder since specific API key/embed is unavailable */}
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.420663989139!2d106.71539491480133!3d10.855574792267675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752862c9c74ab3%3A0x6b30f242af03d360!2zNjUyLzI5IFF14buRYyBs4buZIDEzLCBIaeG7h3AgQsOsbmggUGjGsOG7m2MsIFRo4bunIMSQ4bupYywgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s" 
             width="100%" 
